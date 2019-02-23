@@ -2,8 +2,6 @@ def pipelineContext = [:]
 
 pipeline{
     agent{
-        docker 'maven:3.6.0'
-
         dockerfile {
             filename 'Dockerfile.build'
             label 'dockertest'
