@@ -32,6 +32,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>dockertest</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
