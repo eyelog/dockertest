@@ -1,7 +1,14 @@
 def pipelineContext = [:]
 
 pipeline{
-    agent any
+    agent{
+        docker 'maven:3.6.0'
+
+        dockerfile {
+            filename 'Dockerfile.build'
+            label 'dockertest'
+        }
+    }
 
     environment {
         DOCKER_IMAGE_TAG = "Dockerfile.build:build-${env.BUILD_ID}"
