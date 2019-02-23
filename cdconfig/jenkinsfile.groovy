@@ -4,7 +4,7 @@ pipeline{
         stage('Test build'){
             steps{
                 echo 'Logcat Maven version'
-                sh 'mvn --version'
+                bat 'mvn --version'
             }
         }
     }
