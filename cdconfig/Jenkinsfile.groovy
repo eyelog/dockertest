@@ -4,7 +4,7 @@ pipeline{
     agent any
 
     environment {
-        DOCKER_IMAGE_TAG = "dockertest:build-${env.BUILD_ID}"
+        DOCKER_IMAGE_TAG = "Dockerfile.build:build-${env.BUILD_ID}"
     }
     stages{
         stage('Test environment'){
@@ -13,6 +13,7 @@ pipeline{
                 bat 'mvn --version'
             }
         }
+
         stage ('Compile stage'){
             steps {
                 withMaven(maven : 'MAVEN_HOME') {
@@ -36,11 +37,12 @@ pipeline{
                 }
             }
         }
+
         stage('Build image'){
             steps{
                 echo "Build docker image"
                 script {
-                    dockerImage = docker.build("${env.DOCKER_IMAGE_TAG}",  '-f .cdconfig/dockerfile .')
+                    dockerImage = docker.build("${env.DOCKER_IMAGE_TAG}",  '-f .cdconfig/Dockerfile.build .')
                     pipelineContext.dockerImage = dockerImage
                 }
             }
