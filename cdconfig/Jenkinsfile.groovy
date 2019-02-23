@@ -1,12 +1,7 @@
 def pipelineContext = [:]
 
 pipeline{
-    agent{
-        dockerfile {
-            filename 'Dockerfile.build'
-            label 'dockertest'
-        }
-    }
+    agent any
 
     environment {
         DOCKER_IMAGE_TAG = "Dockerfile.build:build-${env.BUILD_ID}"
@@ -47,9 +42,13 @@ pipeline{
             steps{
                 echo "Build docker image"
                 script {
-                    dockerImage = docker.build("${env.DOCKER_IMAGE_TAG}",  '-f .cdconfig/Dockerfile.build .')
-                    pipelineContext.dockerImage = dockerImage
+                    def customImage = docker.build("testset:${env.BUILD_ID}")
+                    customImage.push()
                 }
+//                script {
+//                    dockerImage = docker.build("${env.DOCKER_IMAGE_TAG}",  '-f .cdconfig/Dockerfile.build .')
+//                    pipelineContext.dockerImage = dockerImage
+//                }
             }
         }
     }
