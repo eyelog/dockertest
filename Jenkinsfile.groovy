@@ -57,7 +57,7 @@ pipeline{
         stage('Docker run'){
             steps{
                 withMaven(maven : 'MAVEN_HOME') {
-                    bat 'docker build -f Dockerfile.build -t dockertest .'
+                    bat 'docker run -p 8097:8097 dockertest'
                 }
             }
         }
