@@ -41,7 +41,9 @@ pipeline{
         stage('Build image'){
             steps{
                 echo "Build docker image"
-                bat 'docker -v'
+                withMaven(maven : 'MAVEN_HOME') {
+                    bat 'docker -v'
+                }
             }
         }
     }
