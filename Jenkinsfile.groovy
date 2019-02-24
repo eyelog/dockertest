@@ -41,14 +41,14 @@ pipeline{
         stage('Build image'){
             steps{
                 echo "Build docker image"
-                script {
-                    def customImage = docker.build("target/testset:${env.BUILD_ID}")
-                    customImage.push()
-                }
 //                script {
-//                    dockerImage = docker.build("${env.DOCKER_IMAGE_TAG}",  '-f .cdconfig/Dockerfile.build .')
-//                    pipelineContext.dockerImage = dockerImage
+//                    def customImage = docker.build("testset:${env.BUILD_ID}")
+//                    customImage.push()
 //                }
+                script {
+                    dockerImage = docker.build("${env.DOCKER_IMAGE_TAG}",  '-f .cdconfig/Dockerfile.build .')
+                    pipelineContext.dockerImage = dockerImage
+                }
             }
         }
     }
