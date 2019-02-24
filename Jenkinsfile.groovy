@@ -38,11 +38,26 @@ pipeline{
             }
         }
 
-        stage('Build image'){
+        stage('Docker system prune'){
             steps{
-                echo "Build docker image"
                 withMaven(maven : 'MAVEN_HOME') {
-                    bat 'docker -v'
+                    bat 'docker system prune -a'
+                }
+            }
+        }
+
+        stage('Docker build image'){
+            steps{
+                withMaven(maven : 'MAVEN_HOME') {
+                    bat 'docker build -f Dockerfile.build -t dockertest .'
+                }
+            }
+        }
+
+        stage('Docker run'){
+            steps{
+                withMaven(maven : 'MAVEN_HOME') {
+                    bat 'docker build -f Dockerfile.build -t dockertest .'
                 }
             }
         }
