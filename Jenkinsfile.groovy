@@ -41,13 +41,7 @@ pipeline{
         stage('Build image'){
             steps{
                 echo "Build docker image"
-//                script {
-//                    def customImage = docker.build("testset:${env.BUILD_ID}")
-//                    customImage.push()
-//                }
-                script {
-                    bat 'docker --version'
-                }
+                bat 'docker -v'
             }
         }
     }
