@@ -38,13 +38,13 @@ pipeline{
             }
         }
 
-        stage('Docker system prune'){
-            steps{
-                withMaven(maven : 'MAVEN_HOME') {
-                    bat 'docker system prune -a -f'
-                }
-            }
-        }
+//        stage('Docker system prune'){
+//            steps{
+//                withMaven(maven : 'MAVEN_HOME') {
+//                    bat 'docker system prune -a -f'
+//                }
+//            }
+//        }
 
         stage('Docker build image'){
             steps{
