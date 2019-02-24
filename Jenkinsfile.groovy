@@ -46,8 +46,7 @@ pipeline{
 //                    customImage.push()
 //                }
                 script {
-                    dockerImage = docker.build("${env.DOCKER_IMAGE_TAG}",  '-f .cdconfig/Dockerfile.build .')
-                    pipelineContext.dockerImage = dockerImage
+                    bat 'docker --version'
                 }
             }
         }
