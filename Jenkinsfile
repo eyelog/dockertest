@@ -1,11 +1,6 @@
-def pipelineContext = [:]
-
 pipeline{
     agent any
 
-    environment {
-        DOCKER_IMAGE_TAG = "Dockerfile.build:build-${env.BUILD_ID}"
-    }
     stages{
         stage('Test environment'){
             steps{
@@ -17,15 +12,7 @@ pipeline{
         stage ('Compile stage'){
             steps {
                 withMaven(maven : 'MAVEN_HOME') {
-                    bat 'mvn clean compile'
-                }
-            }
-        }
-
-        stage ('Testing stage') {
-            steps {
-                withMaven(maven : 'MAVEN_HOME') {
-                    bat 'mvn test'
+                    bat 'mvn clean clean'
                 }
             }
         }
@@ -33,23 +20,15 @@ pipeline{
         stage ('Deployment stage') {
             steps {
                 withMaven(maven : 'MAVEN_HOME') {
-                    bat 'mvn deploy'
+                    bat 'mvn install'
                 }
             }
         }
 
-//        stage('Docker system prune'){
-//            steps{
-//                withMaven(maven : 'MAVEN_HOME') {
-//                    bat 'docker system prune -a -f'
-//                }
-//            }
-//        }
-
         stage('Docker build image'){
             steps{
                 withMaven(maven : 'MAVEN_HOME') {
-                    bat 'docker build -f Dockerfile.build -t dockertest .'
+                    bat 'docker build -f Dockerfile -t dockertest .'
                 }
             }
         }
@@ -57,7 +36,7 @@ pipeline{
         stage('Docker run'){
             steps{
                 withMaven(maven : 'MAVEN_HOME') {
-                    bat 'docker run -p 8097:8097 dockertest'
+                    bat 'docker run -p 8096:8096 dockertest'
                 }
             }
         }
