@@ -1,5 +1,3 @@
-def result
-
 pipeline{
     agent any
 
@@ -25,8 +23,8 @@ pipeline{
 
         stage ('Start jar') {
             steps {
-                $result = bat 'java -jar target/dockertest.jar'
-                echo result
+                def result = bat 'java -jar target/dockertest.jar'
+                echo $result
             }
         }
     }
