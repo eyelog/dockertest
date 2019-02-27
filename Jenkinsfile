@@ -36,7 +36,7 @@ pipeline{
         stage('Docker run'){
             steps{
                 withMaven(maven : 'MAVEN_HOME') {
-                    bat 'docker run -p 8096:8096 dockertest'
+                    bat 'docker run -d -p 8096:8096 dockertest start'
                 }
             }
         }
