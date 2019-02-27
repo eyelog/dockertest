@@ -11,33 +11,25 @@ pipeline{
 
         stage ('Compile stage'){
             steps {
-                withMaven(maven : 'MAVEN_HOME') {
-                    bat 'mvn clean clean'
-                }
+                bat 'mvn clean clean'
             }
         }
 
         stage ('Deployment stage') {
             steps {
-                withMaven(maven : 'MAVEN_HOME') {
-                    bat 'mvn install'
-                }
+                bat 'mvn install'
             }
         }
 
         stage('Docker build image'){
             steps{
-                withMaven(maven : 'MAVEN_HOME') {
-                    bat 'docker build -f Dockerfile -t dockertest .'
-                }
+                bat 'docker build -f Dockerfile -t dockertest .'
             }
         }
 
         stage('Docker run'){
             steps{
-                withMaven(maven : 'MAVEN_HOME') {
-                    bat 'docker run -d -p 8096:8096 dockertest start'
-                }
+                bat 'docker run -d -p 8096:8096 dockertest start'
             }
         }
     }
