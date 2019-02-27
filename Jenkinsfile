@@ -25,7 +25,7 @@ pipeline{
 
         stage ('Start jar') {
             steps {
-                result = bat 'java -jar target/dockertest.jar'
+                $result = bat 'java -jar target/dockertest.jar'
                 echo result
             }
         }
