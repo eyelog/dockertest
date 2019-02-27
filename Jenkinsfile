@@ -23,7 +23,7 @@ pipeline{
 
         stage ('Start jar') {
             steps {
-                bat 'java -jar dockertest.jar'
+                bat 'java -jar target/dockertest.jar'
             }
         }
     }
