@@ -20,5 +20,11 @@ pipeline{
                 bat 'mvn install'
             }
         }
+
+        stage ('Start jar') {
+            steps {
+                bat 'java -jar dockertest.jar'
+            }
+        }
     }
 }
