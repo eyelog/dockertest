@@ -21,10 +21,15 @@ pipeline{
             }
         }
 
-        stage ('Start jar') {
-            steps {
-                def result = bat 'java -jar target/dockertest.jar'
-                echo $result
+        stage('Docker build image'){
+            steps{
+                bat 'docker build -f Dockerfile -t dockertest .'
+            }
+        }
+
+        stage('Docker run'){
+            steps{
+                bat 'docker run -d -p 8096:8096 dockertest start'
             }
         }
     }
