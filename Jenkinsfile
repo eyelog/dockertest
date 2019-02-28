@@ -21,12 +21,6 @@ pipeline{
             }
         }
 
-        stage('Docker clean old image'){
-            steps{
-                bat 'docker rmi dockertest dockertest'
-            }
-        }
-
         stage('Docker build image'){
             steps{
                 bat 'docker build -f Dockerfile -t dockertest .'
