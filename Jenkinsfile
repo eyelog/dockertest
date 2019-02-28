@@ -20,17 +20,5 @@ pipeline{
                 sh 'mvn install'
             }
         }
-
-        stage('Docker build image'){
-            steps{
-                sh 'docker build -f Dockerfile -t dockertest .'
-            }
-        }
-
-        stage('Docker run'){
-            steps{
-                sh 'docker run -d -p 8096:8096 dockertest start'
-            }
-        }
     }
 }
