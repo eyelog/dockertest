@@ -23,13 +23,13 @@ pipeline{
 
         stage('Docker build image'){
             steps{
-                bat "docker build -f Dockerfile -t dockertest ."
+                sh 'docker build -f Dockerfile -t dockertest .'
             }
         }
 
         stage('Docker run'){
             steps{
-                bat "docker run -d -p 8096:8096 dockertest start"
+                sh 'docker run -d -p 8096:8096 dockertest start'
             }
         }
     }
