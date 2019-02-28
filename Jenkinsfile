@@ -23,7 +23,6 @@ pipeline{
 
         stage('Docker clean old image'){
             steps{
-                bat 'docker rm dockertest dockertest'
                 bat 'docker rmi dockertest dockertest'
             }
         }
