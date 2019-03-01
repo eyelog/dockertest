@@ -5,31 +5,31 @@ pipeline{
         stage('Test environment'){
             steps{
                 echo 'Logcat Maven version'
-                sh 'mvn --version'
+                mvn --version
             }
         }
 
         stage ('Compile stage'){
             steps {
-                sh 'mvn clean clean'
+                mvn clean clean
             }
         }
 
         stage ('Deployment stage') {
             steps {
-                sh 'mvn install'
+                mvn install
             }
         }
 
         stage('Docker build image'){
             steps{
-                sh 'docker build -f Dockerfile -t dockertest .'
+                docker build -f Dockerfile -t dockertest .
             }
         }
 
         stage('Docker run'){
             steps{
-                sh 'docker run -d -p 8096:8096 dockertest start'
+                docker run -d -p 8096:8096 dockertest start
             }
         }
     }
